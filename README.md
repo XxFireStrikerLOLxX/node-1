@@ -1,4 +1,4 @@
-# node-1
+# Node-1
 Web hosting node 1
 # Sites on node 1
 <ul>
