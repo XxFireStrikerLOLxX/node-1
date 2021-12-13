@@ -7,5 +7,7 @@ Web hosting node 1
 </ul>
 <h1>Apply to get on this node or any other node</h1>
 Create an issue or dm Givinghawk#4893 on discord
-
+<br>
+<a class="twitter-timeline" data-width="220" data-height="500" data-dnt="true" data-theme="dark" href="https://twitter.com/jrp_hosting">Updates</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+<br>
 ©2021-2022 jrp.best
