@@ -1,4 +1,4 @@
-<link rel="shortcut-icon" src="https://givinghawk.xyz/uploaded/jrp-best-favicon-transparent.png">
+<link rel="shortcut icon" href="https://givinghawk.xyz/uploaded/jrp-best-favicon-transparent.png" />
 <h1>JRP.best Node 1</h1>
 Web hosting node 1
 <h1>Sites on Node 1</h1>
