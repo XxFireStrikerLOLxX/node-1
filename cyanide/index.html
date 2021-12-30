@@ -1,0 +1,121 @@
+<html><head>
+  <title>Cyan's website</title>
+  <script src="https://cdn.jsdelivr.net/gh/xaronnn/js-lanyard/lanyard.js"></script>
+  <link rel="stylesheet" href="http://memefileserver.ml/assets/css/style.css">
+  <link rel="stylesheet" href="http://memefileserver.ml/assets/css/upload.css">
+</head>
+<body>
+  <div class="a">
+    <center>
+	  <div style="width: 120px; height: 120px;">
+		<svg width="138" height="120" viewBox="0 0 92 80" aria-hidden="true">
+          <mask id="status" width="80" height="80">
+            <circle cx="40" cy="40" r="40" fill="white"></circle>
+          </mask>
+          <foreignObject x="0" y="0" width="80" height="80" mask="url(#status)">
+            <div>
+			  <img src="https://cdn.discordapp.com/avatars/679705577630334977/a_aac2f261e8c41cc8abee51fa0bb73eb5.gif?size=80" alt="pfp" id="pfp">
+		    </div>
+          </foreignObject>
+        </svg>
+	  </div>
+	  <p>I'm currently </p><p id="status-p">idle</p><p></p>
+      <h2>Howdy, I'm Cyanide!</h2>
+      <video controls="" autoplay="" loop="" class="vidcircular">
+	    <source src="uploaded/dancing.mp4" type="video/mp4">
+	    Your browser does not support the video element.
+      </video>
+    </center>
+  </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+//Variables
+var user_id = '679705577630334977';
+var apiurl = `https://api.lanyard.rest/v1/users`;
+var avatarbase = `https://cdn.discordapp.com/avatars`;
+var status, statussvg, pfp, pfpurl, discordavatarurlgif, discordavatarurlwebp, imgsrc;
+var gif = "False";
+var webp = "False";
+
+var offlinestatus = `<rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white"></rect><rect x="10" y="7.5" width="5" height="5" rx="2.5" ry="2.5" fill="black"></rect><polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;"></polygon><circle fill="black" cx="12.5" cy="10" r="0"></circle></mask><rect fill="hsl(214, calc(var(--saturation-factor, 1) * 9.9%), 50.4%)" width="25" height="15" mask="url(#offline)"></rect><svg x="14.5" y="17" width="25" height="15" viewBox="0 0 25 15" class="cursorDefault-dsQJ1n"><mask id="offline"><rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white"></rect><rect x="12.5" y="10" width="0" height="0" rx="0" ry="0" fill="black"></rect><polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;"></polygon><circle fill="black" cx="12.5" cy="10" r="0"></circle></mask><rect fill="hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%)" width="25" height="15" mask="url(#offline)"></rect></svg>`;
+var onlinestatus = `<mask id="online"><rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white"></rect><rect x="12.5" y="10" width="0" height="0" rx="0" ry="0" fill="black"></rect><polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;"></polygon><circle fill="black" cx="12.5" cy="10" r="0"></circle></mask><rect fill="hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%)" width="25" height="15" mask="url(#online)"></rect>`;
+var donotdisturbstatus = `<mask id="dnd"><rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white"></rect><rect x="8.75" y="8.75" width="7.5" height="2.5" rx="1.25" ry="1.25" fill="black"></rect><polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;"></polygon><circle fill="black" cx="12.5" cy="10" r="0"></circle></mask><rect fill="hsl(359, calc(var(--saturation-factor, 1) * 82.6%), 59.4%)" width="25" height="15" mask="url(#dnd)"></rect>`;
+var idlestatus = `<mask id="idle"><rect x="7.5" y="5" width="10" height="10" rx="5" ry="5" fill="white"></rect><rect x="6.25" y="3.75" width="7.5" height="7.5" rx="3.75" ry="3.75" fill="black"></rect><polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;"></polygon><circle fill="black" cx="12.5" cy="10" r="0"></circle></mask><rect fill="hsl(38, calc(var(--saturation-factor, 1) * 95.7%), 54.1%)" width="25" height="15" mask="url(#idle)"></rect>`;
+var onlinephone = `<mask id="onlinephone"><rect x="7.5" y="0" width="10" height="15" rx="1.875" ry="1.875" fill="white"></rect><rect x="8.75" y="2.5" width="7.5" height="7.5" rx="0" ry="0" fill="black"></rect><polygon points="-2.16506,-2.5 2.16506,0 -2.16506,2.5" fill="black" transform="scale(0) translate(13.125 10)" style="transform-origin: 13.125px 10px;"></polygon><circle fill="black" cx="12.5" cy="12.5" r="1.25"></circle></mask><rect fill="hsl(139, calc(var(--saturation-factor, 1) * 47.3%), 43.9%)" width="25" height="15" mask="url(#onlinephone)"></rect>`;
+
+//Functions
+function testImage(url) {
+  return new Promise(function (resolve, reject) {
+    var timeout = 5000;
+    var timer, img = new Image();
+    img.onerror = img.onabort = function () {
+      clearTimeout(timer);
+      reject("error");
+    };
+    img.onload = function () {
+      clearTimeout(timer);
+      resolve("success");
+    };
+    timer = setTimeout(function () {
+      // reset .src to invalid URL so it stops previous
+      // loading, but doesn't trigger new load
+      img.src = "//!!!!/test.jpg";
+      reject("timeout");
+    }, timeout);
+    img.src = url;
+  });
+};
+
+//Get rpc
+fetch(`${apiurl}/${user_id}`).then(function(response) {
+  return response.json();
+}).then(function(userdatajson) {
+  pfp = userdatajson.data.discord_user.avatar;
+  status = userdatajson.data.discord_status;
+  discordavatarurlgif = `${avatarbase}/${user_id}/${pfp}.gif?size=80`;
+  discordavatarurlwebp = `${avatarbase}/${user_id}/${pfp}.webp?size=80`;
+  //alert(userdatajson.data.active_on_discord_desktop);
+  if (status == "online") {
+	if (userdatajson.data.active_on_discord_mobile == true) {
+      statussvg = onlinephone;
+    } else {
+      statussvg = onlinestatus;
+	};
+  } else if (status == "offline") {
+    statussvg = offlinestatus;
+  } else if (status == "idle") {
+    statussvg = idlestatus;
+  };
+  //Check img
+  var validimagegif = testImage(discordavatarurlgif);
+  var validimagewebp = testImage(discordavatarurlwebp);
+  validimagegif.then(function(value) {
+    if (value == "success") {
+      gif = "True";
+      document.getElementById('pfp').src = discordavatarurlgif;
+    } else if (value == "timeout") {
+      validimagewebp.then(function(value) {
+        if (value == "success") {
+          webp = "True";
+          console.log(gif + " " + webp);
+        } else if (value == "timeout") {
+	      throw new Error(`Image timedout: pfp was not set!`);
+        };
+      });
+    };
+  });
+  //Set pfp
+  if (gif == "True") {
+    imgsrc = discordavatarurlgif;
+  } else {
+    imgsrc = discordavatarurlwebp;
+  };
+  document.getElementById('pfp').src = imgsrc;
+  //console.log(statussvg);
+  document.getElementById("status-p").innerHTML = status;
+}).catch(function(err) {
+  console.log(`error: ${err}`);
+});
+</script>
+</body></html>
